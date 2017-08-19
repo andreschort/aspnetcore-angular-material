@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AppModuleShared } from './app.module.shared';
 import { AppComponent } from './components/app/app.component';
 
@@ -9,7 +11,8 @@ import { AppComponent } from './components/app/app.component';
     imports: [
         BrowserModule,
         AppModuleShared,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        FlexLayoutModule,
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl }
