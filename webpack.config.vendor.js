@@ -15,6 +15,8 @@ const treeShakableModules = [
     'zone.js',
 ];
 const nonTreeShakableModules = [
+    '@angular/material',
+    'hammerjs',
     'es6-promise',
     'es6-shim',
     'event-source-polyfill',
@@ -22,7 +24,6 @@ const nonTreeShakableModules = [
 const allModules = treeShakableModules.concat(nonTreeShakableModules);
 
 module.exports = (env) => {
-    const extractCSS = new ExtractTextPlugin('vendor.css');
     const isDevBuild = !(env && env.prod);
     const sharedConfig = {
         stats: { modules: false },
@@ -51,13 +52,7 @@ module.exports = (env) => {
             vendor: isDevBuild ? allModules : nonTreeShakableModules
         },
         output: { path: path.join(__dirname, 'wwwroot', 'dist') },
-        module: {
-            rules: [
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
-            ]
-        },
         plugins: [
-            extractCSS,
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
@@ -74,9 +69,6 @@ module.exports = (env) => {
         output: {
             path: path.join(__dirname, 'ClientApp', 'dist'),
             libraryTarget: 'commonjs2',
-        },
-        module: {
-            rules: [ { test: /\.css(\?|$)/, use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] } ]
         },
         plugins: [
             new webpack.DllPlugin({

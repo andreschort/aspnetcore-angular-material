@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import 'zone.js';
+import 'hammerjs';
+import 'style-loader!../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module.browser';
